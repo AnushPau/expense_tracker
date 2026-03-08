@@ -1,7 +1,13 @@
+"use client"
 import React from 'react'
 import Image from "next/image";
+import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 function Hero() {
+
+  const { isSignedIn } = useUser();
+
   return (
     <section className="bg-white lg:h-screen lg:grid lg:place-content-center">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -12,7 +18,6 @@ function Hero() {
             <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
               Take money into your own
               <strong className="text-indigo-600"> HANDS </strong>
-              
             </h1>
 
             <p className="mt-4 text-base text-gray-700 sm:text-lg">
@@ -21,14 +26,12 @@ function Hero() {
             </p>
 
             <div className="mt-6 flex gap-4">
-              <a
-                href="/sign-in"
+              <Link
+                href={isSignedIn ? "/dashboard" : "/sign-in"}
                 className="inline-block rounded border border-indigo-600 bg-indigo-600 px-5 py-3 font-medium text-white shadow-sm transition hover:bg-indigo-700"
               >
                 Start Saving
-              </a>
-
-              
+              </Link>
             </div>
           </div>
 
@@ -49,7 +52,5 @@ function Hero() {
     </section>
   );
 }
-
-
 
 export default Hero
