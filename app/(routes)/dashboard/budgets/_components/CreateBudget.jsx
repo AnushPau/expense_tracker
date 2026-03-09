@@ -2,8 +2,10 @@
 import React, { useState } from 'react'
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -11,10 +13,34 @@ import {
 import EmojiPicker from 'emoji-picker-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Budgets } from '@/utils/schema'
+import { useUser } from '@clerk/nextjs'
+import { db } from '@/utils/dbConfig'
+import { toast } from 'sonner'
 
 function CreateBudget() {
-  const [emoji, setEmojiIcon] = useState('📦');
-  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+  const [emoji, setEmojiIcon] = useState('📦')
+  const [openEmojiPicker, setOpenEmojiPicker] = useState(false)
+  const [name, setName] = useState('')
+  const [amount, setAmount] = useState('')
+
+  const { user } = useUser()
+
+  const onCreateBudget = async () => {
+    const result = await db.insert(Budgets).values({
+      name: name,
+      amount: amount,
+      createdBy: user?.primaryEmailAddress?.emailAddress,
+      icon: emoji
+    }).returning({ insertedId: Budgets.id })
+
+    if (result) {
+      toast('New Budget Created!')
+      setName('')
+      setAmount('')
+      setEmojiIcon('📦')
+    }
+  }
 
   return (
     <div>
@@ -47,8 +73,8 @@ function CreateBudget() {
               <div className="absolute z-50 mt-2">
                 <EmojiPicker
                   onEmojiClick={(e) => {
-                    setEmojiIcon(e.emoji);
-                    setOpenEmojiPicker(false);
+                    setEmojiIcon(e.emoji)
+                    setOpenEmojiPicker(false)
                   }}
                 />
               </div>
@@ -56,18 +82,39 @@ function CreateBudget() {
 
             <div className="mt-4">
               <h2 className="text-black font-medium my-1">Budget Name</h2>
-              <Input placeholder="e.g. Groceries" />
+              <Input
+                placeholder="e.g. Groceries"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
 
             <div className="mt-4">
               <h2 className="text-black font-medium my-1">Budget Amount</h2>
-              <Input type="number" placeholder="e.g. 5000" />
+              <Input
+                type="text"
+                inputMode="numeric"
+                placeholder="e.g. 5000"
+                value={amount}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, '')
+                  setAmount(value)
+                }}
+              />
             </div>
-
-            <Button className="mt-5 w-full">
-              Create Budget
-            </Button>
           </div>
+
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button
+                disabled={!(name && amount)}
+                onClick={onCreateBudget}
+                className="mt-5 w-full"
+              >
+                Create Budget
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
