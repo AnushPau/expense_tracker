@@ -18,7 +18,7 @@ import { useUser } from '@clerk/nextjs'
 import { db } from '@/utils/dbConfig'
 import { toast } from 'sonner'
 
-function CreateBudget() {
+function CreateBudget({ refreshData }) {
   const [emoji, setEmojiIcon] = useState('📦')
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false)
   const [name, setName] = useState('')
@@ -35,6 +35,7 @@ function CreateBudget() {
     }).returning({ insertedId: Budgets.id })
 
     if (result) {
+      refreshData?.()
       toast('New Budget Created!')
       setName('')
       setAmount('')
