@@ -6,6 +6,7 @@ import { db } from '@/utils/dbConfig'
 import { eq, sql, getTableColumns, and } from 'drizzle-orm'
 import { useParams } from 'next/navigation'
 import BudgetItem from '../../budgets/_components/BudgetItem'
+import AddExpenses from './_components/AddExpenses'
 
 function ExpensesScreen() {
   const { user } = useUser();
@@ -41,8 +42,15 @@ function ExpensesScreen() {
   return (
     <div className='p-8'>
       <h2 className='text-2xl font-bold'>My expenses</h2>
-      <div className='grid grid-cols-1 md:grid-cols-2 mt-6'>
-        {budgetInfo && <BudgetItem budget={budgetInfo} />}
+      <div className='grid grid-cols-1 md:grid-cols-2 mt-6 gap-5'>
+        {budgetInfo ? <BudgetItem budget={budgetInfo} 
+        />:
+        <div className ='h-40 w-full bg-slate-200 rounded-lg animate-pulse'>
+        </div>}
+        <AddExpenses budgetId = {params.id}
+        user={user}
+        refreshData={()=>getBudgetInfo()}
+        />
       </div>
     </div>
   );
