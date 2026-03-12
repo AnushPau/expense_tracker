@@ -5,45 +5,42 @@ import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 
 function Hero() {
-
   const { isSignedIn } = useUser();
 
   return (
-    <section className="bg-white lg:h-screen lg:grid lg:place-content-center">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+    <section className="bg-white min-h-screen flex items-center">
+      <div className="mx-auto max-w-[1600px] w-full px-8 py-20 sm:px-12 lg:px-20">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
 
-          {/* LEFT: TEXT */}
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+            <h1 className="text-5xl font-bold leading-tight text-gray-900 sm:text-6xl lg:text-7xl">
               Take money into your own
               <strong className="text-indigo-600"> HANDS </strong>
             </h1>
 
-            <p className="mt-4 text-base text-gray-700 sm:text-lg">
+            <p className="mt-6 text-lg text-gray-700 sm:text-xl lg:text-2xl max-w-2xl">
               Track expenses, understand spending patterns, and take control
               of your finances.
             </p>
 
-            <div className="mt-6 flex gap-4">
+            <div className="mt-8 flex gap-4">
               <Link
                 href={isSignedIn ? "/dashboard" : "/sign-in"}
-                className="inline-block rounded border border-indigo-600 bg-indigo-600 px-5 py-3 font-medium text-white shadow-sm transition hover:bg-indigo-700"
+                className="inline-block rounded-lg border border-indigo-600 bg-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-sm transition hover:bg-indigo-700"
               >
                 Start Saving
               </Link>
             </div>
           </div>
 
-          {/* RIGHT: IMAGE */}
           <div className="flex justify-center">
             <Image
-              src="/overviewimg.avif"
+              src="/moneyfumbl.jpg"
               alt="Expense tracking overview illustration"
-              width={400}
-              height={400}
+              width={800}
+              height={800}
               priority
-              className="rounded-lg"
+              className="rounded-lg w-full max-w-[800px] h-auto"
             />
           </div>
 
