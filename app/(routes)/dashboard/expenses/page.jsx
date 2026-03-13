@@ -19,8 +19,16 @@ function ExpensesPage() {
 
   const getAllExpenses = async () => {
     const result = await db
-      .select()
+      .select({
+        id: Expenses.id,
+        name: Expenses.name,
+        amount: Expenses.amount,
+        createdAt: Expenses.createdAt,
+        budgetId: Expenses.budgetId,
+      })
       .from(Expenses)
+      .innerJoin(Budgets, eq(Expenses.budgetId, Budgets.id))
+      .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
       .orderBy(desc(Expenses.id))
 
     setExpensesList(result)

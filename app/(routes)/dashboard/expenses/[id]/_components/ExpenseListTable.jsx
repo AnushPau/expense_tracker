@@ -5,19 +5,22 @@ import { db } from '@/utils/dbConfig';
 import { eq } from 'drizzle-orm';
 import { toast } from 'sonner';
 
-function ExpenseListTable({ expensesList, refreshData }) {
+function ExpenseListTable({ expensesList = [], refreshData }) {
 
     const deleteExpense = async (expenses) => {
         const result = await db.delete(Expenses).where(eq(Expenses.id, expenses.id))
         .returning();
-        if(result){
+
+        if (result) {
             toast("Expense deleted successfully!")
-            refreshData();
+            refreshData?.();
         }
     }
+
     return (
         <div className='mt-3'>
             <h2 className='font-bold text-lg'>Latest Expenses</h2>
+
             <div className='grid grid-cols-4 bg-slate-200 p-2 font-bold text-slate-700'>
                 <h2>Name</h2>
                 <h2>Amount</h2>
@@ -25,25 +28,28 @@ function ExpenseListTable({ expensesList, refreshData }) {
                 <h2>Action</h2>
             </div>
 
-            {expensesList?.map((expenses, index) => (
-                <div key={index} className=' grid grid-cols-4 border-b p-2 items-center bg-slate-50'>
-                    <h2>{expenses.name}</h2>
-                    <h2>${expenses.amount}</h2>
-                    <h2>
-                        {new Date(expenses.createdAt).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric"
-                        })}
-                    </h2>
-                    <div>
-                        <Trash className="cursor-pointer text-red-500" size={20}
-                        onClick={() =>deleteExpense(expenses)
-                            
-                        } />
+            {expensesList
+                .filter((expense) => expense?.id && expense?.name && expense?.amount && expense?.createdAt)
+                .map((expense) => (
+                    <div key={expense.id} className='grid grid-cols-4 border-b p-2 items-center bg-slate-50'>
+                        <h2>{expense.name}</h2>
+                        <h2>${expense.amount}</h2>
+                        <h2>
+                            {new Date(expense.createdAt).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric"
+                            })}
+                        </h2>
+                        <div>
+                            <Trash
+                                className="cursor-pointer text-red-500"
+                                size={20}
+                                onClick={() => deleteExpense(expense)}
+                            />
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
         </div>
     )
 }
