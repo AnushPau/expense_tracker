@@ -104,7 +104,6 @@ http://localhost:3000
 ## Author
 
 Anush Paudel  
-University of Texas at Arlington
 
 GitHub: https://github.com/AnushPau
 
