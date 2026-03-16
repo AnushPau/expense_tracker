@@ -7,12 +7,22 @@ import { db } from "@/utils/dbConfig";
 import { Expenses } from "@/utils/schema";
 import { toast } from "sonner";
 
-function AddExpenses({ budgetId, user, refreshData }) {
+function AddExpenses({
+  budgetId,
+  user,
+  refreshData,
+  remaining,
+  categoryName,
+}) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
 
   const addNewExpense = async () => {
     try {
+      const numericAmount = Number(amount);
+      const previousRemaining = Number(remaining);
+      const newRemaining = previousRemaining - numericAmount;
+
       const result = await db
         .insert(Expenses)
         .values({
@@ -26,8 +36,30 @@ function AddExpenses({ budgetId, user, refreshData }) {
       console.log(result);
 
       if (result) {
+        if (
+          previousRemaining >= 0 &&
+          newRemaining < 0 &&
+          user?.primaryEmailAddress?.emailAddress
+        ) {
+          try {
+            await fetch("/api/send-budget-alert", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: user.primaryEmailAddress.emailAddress,
+                category: categoryName,
+                remaining: newRemaining,
+                amount: numericAmount,
+              }),
+            });
+          } catch (emailError) {
+            console.log("Email send failed:", emailError);
+          }
+        }
 
-        refreshData()
+        refreshData();
         toast("New Expense Added!");
         setName("");
         setAmount("");
