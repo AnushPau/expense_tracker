@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     const { email, category, remaining, amount } = await req.json();
 
     const { data, error } = await resend.emails.send({
-      from: "Budget Alerts <onboarding@resend.dev>",
+      from: "Budget Alerts <alerts@financeyou.site>",
       to: email,
       subject: `Budget exceeded for ${category}`,
       html: `
