@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+FinanceYou
 
-## Getting Started
+FinanceYou is a full-stack expense tracking web application that allows users to record, manage, and analyze their personal spending.
+The application is built using Node.js, Drizzle ORM, Neon PostgreSQL, and deployed on Vercel using serverless functions.
 
-First, run the development server:
+🌐 Live App: https://financeyou.site
 
-```bash
+Table of Contents
+
+Background
+
+Install
+
+Usage
+
+Architecture
+
+Tech Stack
+
+Contributing
+
+License
+
+Background
+
+Managing personal finances requires clear visibility into daily spending. Many individuals struggle to track expenses effectively without structured tools.
+
+FinanceYou was built to explore modern full-stack development practices while solving a real-world problem: helping users understand where their money goes.
+
+The project demonstrates how a serverless architecture combined with modern database tooling can create scalable financial applications.
+
+Install
+
+Clone the repository:
+
+git clone https://github.com/AnushPau/expense_tracker.git
+cd expense_tracker
+
+Install dependencies:
+
+npm install
+
+Create an environment file:
+
+DATABASE_URL=your_neon_database_connection_string
+Usage
+
+Run the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the application:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app allows users to:
 
-## Learn More
+Add expenses
 
-To learn more about Next.js, take a look at the following resources:
+Delete expenses
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+View transaction history
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Store financial data in a cloud database
 
-## Deploy on Vercel
+Architecture
+User Browser
+     |
+     v
+FinanceYou Web App (Frontend)
+     |
+     v
+Vercel Serverless API (Node.js)
+     |
+     v
+Drizzle ORM
+     |
+     v
+Neon PostgreSQL Database
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The system uses a serverless backend architecture where API endpoints run as Vercel functions and interact with a Neon PostgreSQL database using Drizzle ORM.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Tech Stack
+
+Frontend
+
+JavaScript
+
+HTML
+
+CSS
+
+Backend
+
+Node.js
+
+Vercel Serverless Functions
+
+Database
+
+Neon PostgreSQL
+
+ORM
+
+Drizzle ORM
+
+Deployment
+
+Vercel
+
+Contributing
+
+Feel free to contribute improvements or new features.
+
+Fork the repository
+
+Create a feature branch
+
+Submit a pull request
+
+License
+
+MIT License
