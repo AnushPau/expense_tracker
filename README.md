@@ -1,69 +1,38 @@
-FinanceYou
+# FinanceYou
 
-FinanceYou is a full-stack expense tracking web application that allows users to record, manage, and analyze their personal spending.
-The application is built using Node.js, Drizzle ORM, Neon PostgreSQL, and deployed on Vercel using serverless functions.
+### Modern Personal Finance & Expense Tracking Platform
 
-🌐 Live App: https://financeyou.site
+Live Application: https://financeyou.site
 
-Table of Contents
+FinanceYou is a modern full-stack expense tracking application that helps users record, organize, and analyze their personal spending.
 
-Background
+The platform demonstrates how modern web technologies can be used to build scalable financial applications using a serverless architecture.
 
-Install
+---
 
-Usage
+## Tech Stack
 
-Architecture
+Backend: Node.js  
+Database: Neon PostgreSQL  
+ORM: Drizzle ORM  
+Deployment: Vercel Serverless Functions
 
-Tech Stack
+---
 
-Contributing
+## Features
 
-License
+- Add expenses
+- Delete expenses
+- View transaction history
+- Persistent cloud database storage
+- Serverless backend architecture
+- Clean and responsive user interface
 
-Background
+---
 
-Managing personal finances requires clear visibility into daily spending. Many individuals struggle to track expenses effectively without structured tools.
+## System Architecture
 
-FinanceYou was built to explore modern full-stack development practices while solving a real-world problem: helping users understand where their money goes.
-
-The project demonstrates how a serverless architecture combined with modern database tooling can create scalable financial applications.
-
-Install
-
-Clone the repository:
-
-git clone https://github.com/AnushPau/expense_tracker.git
-cd expense_tracker
-
-Install dependencies:
-
-npm install
-
-Create an environment file:
-
-DATABASE_URL=your_neon_database_connection_string
-Usage
-
-Run the development server:
-
-npm run dev
-
-Open the application:
-
-http://localhost:3000
-
-The app allows users to:
-
-Add expenses
-
-Delete expenses
-
-View transaction history
-
-Store financial data in a cloud database
-
-Architecture
+```
 User Browser
      |
      v
@@ -77,47 +46,70 @@ Drizzle ORM
      |
      v
 Neon PostgreSQL Database
+```
 
-The system uses a serverless backend architecture where API endpoints run as Vercel functions and interact with a Neon PostgreSQL database using Drizzle ORM.
+FinanceYou uses a **serverless backend architecture** deployed on Vercel.  
+The backend communicates with a Neon PostgreSQL database using Drizzle ORM.
 
-Tech Stack
+---
 
-Frontend
+## Running Locally
 
-JavaScript
+### Clone repository
 
-HTML
+```bash
+git clone https://github.com/AnushPau/expense_tracker.git
+cd expense_tracker
+```
 
-CSS
+### Install dependencies
 
-Backend
+```bash
+npm install
+```
 
-Node.js
+### Configure environment variables
 
-Vercel Serverless Functions
+Create a `.env` file:
 
-Database
+```
+DATABASE_URL=your_neon_database_connection_string
+```
 
-Neon PostgreSQL
+### Start development server
 
-ORM
+```bash
+npm run dev
+```
 
-Drizzle ORM
+Open the application:
 
-Deployment
+```
+http://localhost:3000
+```
 
-Vercel
+---
 
-Contributing
+## Future Improvements
 
-Feel free to contribute improvements or new features.
+- Expense categories
+- Spending analytics charts
+- Budget tracking system
+- User authentication
+- AI financial insights
+- Mobile responsive interface
 
-Fork the repository
+---
 
-Create a feature branch
+## Author
 
-Submit a pull request
+Anush Paudel  
+University of Texas at Arlington
 
-License
+GitHub: https://github.com/AnushPau
+
+---
+
+## License
 
 MIT License
