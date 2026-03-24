@@ -23,7 +23,7 @@ function BarChartDashBoard({ budgetList }) {
         <div className="animate-pulse space-y-3">
           
           {/* fake bars */}
-          <div className="h-[300px] flex items-end gap-3">
+          <div className="h-75 flex items-end gap-3">
             <div className="bg-gray-300 rounded w-6 h-20"></div>
             <div className="bg-gray-300 rounded w-6 h-32"></div>
             <div className="bg-gray-300 rounded w-6 h-24"></div>

@@ -101,7 +101,7 @@ function CardsPage() {
 
   // Card UI
   const Card = ({ card }) => (
-    <div className="relative rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-700 p-5 text-white shadow-sm">
+    <div className="relative rounded-2xl bg-linear-to-br from-zinc-900 to-zinc-700 p-5 text-white shadow-sm">
 
       {/*Delete Button */}
       <button
