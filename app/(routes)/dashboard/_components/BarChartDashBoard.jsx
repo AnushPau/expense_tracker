@@ -19,7 +19,7 @@ function BarChartDashBoard({ budgetList }) {
       <h2 className="text-lg font-semibold mb-3">Activity</h2>
 
       {isLoading ? (
-        // 🔥 Skeleton UI
+        // Skeleton UI
         <div className="animate-pulse space-y-3">
           
           {/* fake bars */}
@@ -41,7 +41,7 @@ function BarChartDashBoard({ budgetList }) {
           </div>
         </div>
       ) : (
-        // ✅ Actual chart
+        // Actual chart
         <ResponsiveContainer width="80%" height={300}>
           <BarChart
             data={budgetList}
