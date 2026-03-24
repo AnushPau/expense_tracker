@@ -5,7 +5,8 @@ import {
   LayoutGrid,
   PiggyBank,
   ReceiptText,
-  BadgeQuestionMark
+  BadgeQuestionMark,
+  CreditCard
 } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
@@ -33,10 +34,17 @@ function SideNav() {
     },
     {
       id: 4,
+      name: "Cards", //NEW TAB
+      icon: CreditCard,
+      path: "/dashboard/cards"
+    },
+    {
+      id: 5,
       name: "FAQs",
       icon: BadgeQuestionMark,
       path: "/dashboard/faqs"
     }
+
   ];
 
   const path = usePathname();
@@ -46,32 +54,35 @@ function SideNav() {
   }, [path]);
 
   return (
-    <div className="h-screen p-5 border shadow-md">
-      <Image
-        src={"/logo.svg"}
-        alt="Logo"
-        width={100}
-        height={100}
-      />
+    <div className="h-screen p-5 border shadow-md flex flex-col justify-between">
+      <div>
+        <Image
+          src={"/logo.svg"}
+          alt="Logo"
+          width={100}
+          height={100}
+        />
 
-      <div className="mt-5">
-        {menuList.map((menu) => (
-          <Link key={menu.id} href={menu.path}>
-            <div
-              className={`flex gap-2 items-center text-gray-700 font-medium p-5 cursor-pointer rounded-md
-              hover:text-primary hover:bg-blue-50
-              ${path === menu.path ? "text-primary bg-blue-100" : ""}`}
-            >
-              <menu.icon className="h-5 w-5" />
-              {menu.name}
-            </div>
-          </Link>
-        ))}
+        <div className="mt-5">
+          {menuList.map((menu) => (
+            <Link key={menu.id} href={menu.path}>
+              <div
+                className={`flex gap-2 items-center text-gray-700 font-medium p-5 cursor-pointer rounded-md transition-all
+                hover:text-primary hover:bg-blue-50
+                ${path === menu.path ? "text-primary bg-blue-100" : ""}`}
+              >
+                <menu.icon className="h-5 w-5" />
+                {menu.name}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
-      <div className="fixed bottom-10 p-5 flex gap-2 items-center">
+      {/* 🔹 Profile section */}
+      <div className="p-5 flex gap-2 items-center border-t">
         <UserButton />
-        Profile
+        <span className="text-sm">Profile</span>
       </div>
     </div>
   );
